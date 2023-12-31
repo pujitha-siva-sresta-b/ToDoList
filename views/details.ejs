@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>TO-DO APP</title>
+        <script src="https://kit.fontawesome.com/ccdf5b95c6.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body class="body">
+        <h1 >TO-DO APP</h1>
+        <Section class="task1">
+            <form action="add-task" method="post">
+
+                <table class="table1">
+                    <thead>
+                        <tr class="row1">
+                            <th>Add Task</th>
+                            <th>Category</th>
+                            <th>Due Date</th>
+                            <br>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row2">
+                            <td>
+                                <textarea name="task" id="input" cols="20" rows="3" placeholder="Enter Task" required></textarea>
+                            </td>
+                            <td>
+                                <select name="category" id="category" style="padding-top: 7px;padding-bottom: 7px;">
+                                    <option value="Enter Category">Enter Category</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="Meetings">Meetings</option>
+                                    <option value="Work">Work</option>
+                                    <option value="Project">Project</option>
+                                    <option value="Education">Education</option>
+                                </select>
+                            </td>
+                            <td><input type="date" name="date" style="padding-top: 5px;padding-bottom: 5px;" ></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <div class="add-div">
+                    <button class="button-add">ADD TASK</button>
+                </div>
+            </form>
+        </Section>
+        
+        <section class="task2">
+            <form action="/delete-task" method="GET">
+                <h2>Task List</h2>
+                
+                <table class="table2">
+                    <thead>
+                        <tr class="row3">
+                            <th>Select</th>
+                            <th>Task</th>
+                            <th>Category</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(let i of data) { %>
+                            <tr class="row4">
+                                <td><input type="checkbox" class="checkbox" name="<%= i._id %>" ></td>
+                                <td><%= i.task %></td>
+                            
+                                <td>
+                                    <% if(i.category === "Enter Category") { %>
+                                        <button class="color1">No Selected Category</button>
+                                    <% } else { %>
+                                        <button class="color2"><%= i.category %></button>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if(i.date === "") { %>
+                                        <p>No Deadline</p>
+                                    <% } else { %>
+                                        <%= i.date %>
+                                    <% } %>
+                                </td>  
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                
+                <br>
+                <div class="delete-div">
+                    <input type="submit" value="DELETE TASK" class="button-delete">
+                </div>
+            </form>  
+        </section>   
+    </body>
+
+</html>
